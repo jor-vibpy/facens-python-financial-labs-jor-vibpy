@@ -1,7 +1,6 @@
-class Initialize():
+from models.transaction import Transaction
 
-    def __init__(self):
-        self.__transactions = []
+class Initialize():
 
     def show_menu(self):
         print(50*'-')
@@ -25,14 +24,14 @@ class Initialize():
         value = input('Informe o valor: ')
         description = input('Informe a descrição: ')
 
-        self.__transactions.append(
-            (operation, value, description)
-        )
+        transaction = Transaction(operation, value, description)
+        transaction.save()
+
+        del transaction
 
     def to_view(self):
-        for transaction in self.__transactions:
-            print(f'Operation: {transaction[0]} - Value: {transaction[1]} - Description: {transaction[2]}')
-
+        Transaction().view()
+    
     def to_go_out(self):
         print('\nVolte sempre')
 
